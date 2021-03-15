@@ -13,8 +13,9 @@ export class TasksService {
     const { search, status } = filterData;
     let tasks = this.tasks;
     if (search) {
-      tasks = tasks.filter(({ title, description }) =>
-        [title.toLowerCase(), description.toLowerCase()].includes(search.toLowerCase())
+      tasks = tasks.filter(
+        ({ title, description }) =>
+          title.toLowerCase().includes(search.toLowerCase()) || description.toLowerCase().includes(search.toLowerCase())
       );
     }
     if (status) {
