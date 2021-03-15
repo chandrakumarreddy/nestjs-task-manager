@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Task, TaskStatus } from './entities/Task.entity';
 import { FilterDataDto } from './Dto/filter-data.dto';
 import { CreateTaskDto } from './Dto/create-task.dto';
+import { UpdateTaskDto } from './Dto/update-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -42,7 +43,7 @@ export class TasksService {
     return task;
   }
 
-  updateTask(taskId: string, taskData:) {
+  updateTask(taskId: string, taskData: UpdateTaskDto) {
     let task = this.getTask(taskId);
     task = { ...task, ...taskData };
     this.deleteTask(taskId);
