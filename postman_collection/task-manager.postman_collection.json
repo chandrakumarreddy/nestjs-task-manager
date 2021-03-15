@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "d4e292d2-bba0-44af-a8f6-0b05eb14cf0f",
+		"name": "task-manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/tasks?search=test&status=OPEN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"Hello\",\n    \"description\":\"nothing\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/tasks?search=test&status=OPEN",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "test"
+						},
+						{
+							"key": "status",
+							"value": "OPEN"
+						}
+					]
+				},
+				"description": "filterData"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/tasks/89499032-ec00-49dc-8571-7a20a3b2564d",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"Txzcnxzmc,\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/tasks/89499032-ec00-49dc-8571-7a20a3b2564d",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"89499032-ec00-49dc-8571-7a20a3b2564d"
+					]
+				},
+				"description": "udpate Task"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/tasks/89499032-ec00-49dc-8571-7a20a3b2564d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"👋 \",\n    \"description\":\"nothing\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/tasks/89499032-ec00-49dc-8571-7a20a3b2564d",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"89499032-ec00-49dc-8571-7a20a3b2564d"
+					]
+				},
+				"description": "Get single Task"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/tasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"Testing\",\n    \"description\":\"nothing\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/tasks",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "Get All Tasks"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/tasks/89499032-ec00-49dc-8571-7a20a3b2564d",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"👋 \",\n    \"description\":\"nothing\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/tasks/89499032-ec00-49dc-8571-7a20a3b2564d",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"89499032-ec00-49dc-8571-7a20a3b2564d"
+					]
+				},
+				"description": "Delete Task"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/tasks/89499032-ec00-49dc-8571-7a20a3b2564d/status",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"IN_PROGRESS\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/tasks/89499032-ec00-49dc-8571-7a20a3b2564d/status",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"89499032-ec00-49dc-8571-7a20a3b2564d",
+						"status"
+					]
+				},
+				"description": "Update Status"
+			},
+			"response": []
+		}
+	]
+}
