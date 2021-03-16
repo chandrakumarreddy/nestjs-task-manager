@@ -11,7 +11,7 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Get()
-  getAllTasks(@Query() filterData: FilterDataDto): Task[] {
+  getAllTasks(@Query(ValidationPipe) filterData: FilterDataDto): Task[] {
     return this.tasksService.getAllTasks(filterData);
   }
 
