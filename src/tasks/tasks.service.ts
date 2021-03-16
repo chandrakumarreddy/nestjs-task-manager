@@ -24,7 +24,7 @@ export class TasksService {
     return tasks;
   }
 
-  createTask(taskData: CreateTaskDto) {
+  createTask(taskData: CreateTaskDto): Task {
     const { title, description } = taskData;
     const task: Task = {
       id: uuidv4(),
@@ -44,7 +44,7 @@ export class TasksService {
     return task;
   }
 
-  updateTask(taskId: string, taskData: UpdateTaskDto) {
+  updateTask(taskId: string, taskData: UpdateTaskDto): Task {
     let task = this.getTask(taskId);
     task = { ...task, ...taskData };
     this.deleteTask(taskId);
@@ -52,12 +52,12 @@ export class TasksService {
     return task;
   }
 
-  deleteTask(taskId: string) {
+  deleteTask(taskId: string): void {
     const selectedTask = this.getTask(taskId);
     this.tasks = this.tasks.filter((task) => task.id !== selectedTask.id);
   }
 
-  updateStatus(taskId: string, status: TaskStatus) {
+  updateStatus(taskId: string, status: TaskStatus): Task {
     const task = this.getTask(taskId);
     task.status = status;
     this.deleteTask(taskId);

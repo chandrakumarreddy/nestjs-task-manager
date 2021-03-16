@@ -27,7 +27,7 @@ export class TasksController {
   }
 
   @Patch(':id')
-  updateTask(@Param('id') taskId: string, @Body() taskData: UpdateTaskDto): Task {
+  updateTask(@Param('id') taskId: string, @Body(ValidationPipe) taskData: UpdateTaskDto): Task {
     return this.tasksService.updateTask(taskId, taskData);
   }
 
@@ -37,7 +37,7 @@ export class TasksController {
   }
 
   @Patch(':id/status')
-  updateStatus(@Param('id') taskId: string, @Body('status', TaskStatusValidator) status: TaskStatus) {
+  updateStatus(@Param('id') taskId: string, @Body('status', TaskStatusValidator) status: TaskStatus): Task {
     return this.tasksService.updateStatus(taskId, status);
   }
 }
