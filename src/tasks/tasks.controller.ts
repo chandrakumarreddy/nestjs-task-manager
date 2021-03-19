@@ -7,6 +7,11 @@ import { CreateTaskDto } from './Dto/create-task.dto';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
+  @Get()
+  getTasks() {
+    return this.tasksService.getTasks();
+  }
+
   @Get(':id')
   getById(@Param('id', ParseIntPipe) taskId: number): Promise<Task> {
     return this.tasksService.getById(taskId);
