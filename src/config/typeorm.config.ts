@@ -4,7 +4,9 @@ import { config } from 'dotenv';
 config();
 
 class TypeormConfig {
-  constructor(private env: { [k: string]: string | undefined }) {}
+  constructor(private env: { [k: string]: string | undefined }) {
+    console.log(__dirname + '../../**/**/*.entity.ts');
+  }
 
   private getValue(key: string, throwOnMissing?: true): string {
     const value = this.env[key];
@@ -34,7 +36,7 @@ class TypeormConfig {
       username: this.getValue('POSTGRES_USER'),
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
-      entities: [__dirname + '**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
       ssl: this.isProduction(),
       synchronize: true
     };
