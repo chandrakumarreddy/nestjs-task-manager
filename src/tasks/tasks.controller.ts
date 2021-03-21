@@ -9,16 +9,18 @@ import {
   Body,
   Delete,
   Query,
-  Patch
+  Patch,
+  UseGuards
 } from '@nestjs/common';
 import { Task } from './Task.entity';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './Dto/create-task.dto';
 import { FilterDataDto } from './Dto/filter-data.dto';
-// import { UpdateTaskDto } from './Dto/update-task.dto';
 import { TaskStatus } from './task-status.enum';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('tasks')
+@UseGuards(AuthGuard())
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
