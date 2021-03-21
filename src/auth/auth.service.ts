@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthRepository } from './auth.repository';
 import { AuthDto } from './dto/auth.dto';
-import { JwtInterface } from './jwtPayload.interface';
+import { JwtPayload } from './jwtPayload.interface';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +20,7 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException();
     }
-    const payload: JwtInterface = { username: user };
+    const payload: JwtPayload = { username: user };
     const accessToken = this.jwtService.sign(payload);
     return { accessToken };
   }
