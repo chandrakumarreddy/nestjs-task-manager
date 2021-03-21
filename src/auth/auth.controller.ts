@@ -9,4 +9,8 @@ export class AuthController {
   async signup(@Body(ValidationPipe) authDtoData: AuthDto): Promise<void> {
     return this.authService.signup(authDtoData);
   }
+  @Post('/signin')
+  async signin(@Body(ValidationPipe) authDtoData: AuthDto): Promise<void> {
+    return this.authService.signin(authDtoData);
+  }
 }
