@@ -1,3 +1,4 @@
+import { InternalServerErrorException, Logger } from '@nestjs/common';
 import { Auth } from 'src/auth/auth.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateTaskDto } from './Dto/create-task.dto';
@@ -7,6 +8,7 @@ import { Task } from './Task.entity';
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
+  private logger = new Logger('TaskRepository');
   async getTasks(filterDataDto: FilterDataDto, user: Auth): Promise<Task[]> {
     const { search, status } = filterDataDto;
     const query = this.createQueryBuilder('task');
@@ -19,8 +21,13 @@ export class TaskRepository extends Repository<Task> {
     if (status) {
       query.andWhere('task.status = :status', { status });
     }
-    const tasks = await query.getMany();
-    return tasks;
+    try {
+      const tasks = await query.getMany();
+      return tasks;
+    } catch (error) {
+      this.logger.error(`Failed to fetch all tasks for user ${user.id}`);
+      throw new InternalServerErrorException();
+    }
   }
   async createTask(createtaskDto: CreateTaskDto, user: Auth): Promise<Task> {
     const { title, description } = createtaskDto;
@@ -29,7 +36,12 @@ export class TaskRepository extends Repository<Task> {
     task.description = description;
     task.status = TaskStatus.OPEN;
     task.user = user;
-    await task.save();
+    try {
+      await task.save();
+    } catch (error) {
+      this.logger.error(`Failed to save task for user ${user.id}`);
+      throw new InternalServerErrorException();
+    }
     delete task.user;
     return task;
   }

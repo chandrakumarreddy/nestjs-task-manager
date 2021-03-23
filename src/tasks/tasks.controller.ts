@@ -10,7 +10,8 @@ import {
   Delete,
   Query,
   Patch,
-  UseGuards
+  UseGuards,
+  Logger
 } from '@nestjs/common';
 import { Task } from './Task.entity';
 import { TasksService } from './tasks.service';
@@ -24,10 +25,12 @@ import { Auth } from 'src/auth/auth.entity';
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
+  private logger = new Logger('TasksController');
   constructor(private readonly tasksService: TasksService) {}
 
   @Get()
   getTasks(@Query(ValidationPipe) filterDataDto: FilterDataDto, @GetUser() user: Auth) {
+    this.logger.verbose(`get all tasks for user ${user.id}`);
     return this.tasksService.getTasks(filterDataDto, user);
   }
 
@@ -44,6 +47,7 @@ export class TasksController {
 
   @Delete(':id')
   deleteTask(@Param('id', ParseIntPipe) taskId: number, @GetUser() user: Auth): Promise<void> {
+    this.logger.verbose(`delete taskId ${taskId} for user ${user.id}`);
     return this.tasksService.deleteTask(taskId, user);
   }
 
