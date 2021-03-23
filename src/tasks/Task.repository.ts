@@ -7,9 +7,10 @@ import { Task } from './Task.entity';
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
-  async getTasks(filterDataDto: FilterDataDto): Promise<Task[]> {
+  async getTasks(filterDataDto: FilterDataDto, user: Auth): Promise<Task[]> {
     const { search, status } = filterDataDto;
     const query = this.createQueryBuilder('task');
+    query.where('task.userId = :userId', { userId: user.id });
     if (search) {
       query.andWhere('(LOWER(task.title) LIKE :search OR Lower(task.description) LIKE :search)', {
         search: `%${search.toLowerCase()}%`
