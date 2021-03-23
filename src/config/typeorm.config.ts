@@ -38,7 +38,7 @@ class TypeormConfig {
       database: this.getValue('POSTGRES_DATABASE'),
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
       ssl: this.isProduction(),
-      synchronize: true
+      synchronize: false
     };
   }
 }
