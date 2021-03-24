@@ -1,12 +1,8 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { config } from 'dotenv';
-
-config();
+import * as config from 'config';
 
 class TypeormConfig {
-  constructor(private env: { [k: string]: string | undefined }) {
-    console.log(__dirname + '../../**/**/*.entity.ts');
-  }
+  constructor(private env: { [k: string]: string | undefined }) {}
 
   private getValue(key: string, throwOnMissing?: true): string {
     const value = this.env[key];
@@ -18,14 +14,13 @@ class TypeormConfig {
 
   public ensureValues(keys: string[]) {
     keys.forEach((key) => {
-      this.env[key] = this.getValue(key);
+      this.getValue(key);
     });
     return this;
   }
 
   private isProduction() {
-    const production = this.getValue('MODE');
-    return production === 'production';
+    return process.env.NODE_ENV === 'production';
   }
 
   public getTypeOrmConfig(): TypeOrmModuleOptions {
@@ -43,7 +38,9 @@ class TypeormConfig {
   }
 }
 
-const typeormConfig = new TypeormConfig(process.env).ensureValues([
+const envVariables = process.env.NODE_ENV === 'production' ? process.env : config.get('db');
+
+const typeormConfig = new TypeormConfig(envVariables).ensureValues([
   'POSTGRES_HOST',
   'POSTGRES_PORT',
   'POSTGRES_USER',

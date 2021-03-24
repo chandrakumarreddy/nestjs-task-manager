@@ -1,0 +1,13 @@
+server:
+  port: 3000
+
+db:
+  type: 'postgres'
+  POSTGRES_HOST: ''
+  POSTGRES_USER: ''
+  POSTGRES_PASSWORD: ''
+  POSTGRES_DATABASE: 'taskmanagement'
+
+jwt:
+  expiresIn: 3600
+  secret: secret
