@@ -47,9 +47,11 @@ describe('Friends List', () => {
   });
   it('annouse friend', () => {
     friendsList.annouseFriend = jest.fn();
+    friendsList.annouseFriend.mockReturnValue(10);
     expect(friendsList.annouseFriend).not.toHaveBeenCalled();
     friendsList.addFriend('chandra');
     expect(friendsList.annouseFriend).toHaveBeenCalledTimes(1);
+    expect(friendsList.annouseFriend()).toBe(10);
   });
   describe('remove friends', () => {
     it('remove friend when found', () => {
